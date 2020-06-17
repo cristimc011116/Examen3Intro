@@ -39,17 +39,22 @@ def buscarYRemplazar(cadenaTexto, cadenaBuscar, cadenaReemplazar):
 
     while (indiceTexto < len(cadenaTexto)):
         while (cadenaTexto[indiceTexto] == cadenaBuscar[indiceBuscarRemplazar]):
-            if (banderaEditar):
-                cadenaTexto = cadenaTexto[:indiceTexto] + cadenaReemplazar[indiceBuscarRemplazar] + cadenaTexto[indiceTexto+1:]
             indiceBuscarRemplazar += 1
             indiceTexto += 1
             if (indiceBuscarRemplazar == len(cadenaBuscar)):
-                banderaEditar = not banderaEditar
+                banderaEditar = True
                 indiceBuscarRemplazar = 0
                 indiceTexto -= len(cadenaBuscar)
+                break
+        if (banderaEditar):
+            banderaEditar = False
+            cadenaTexto = cadenaTexto[:indiceTexto] + cadenaReemplazar + cadenaTexto[indiceTexto + len(cadenaBuscar):]
+            indiceTexto += len(cadenaReemplazar)
+            indiceBuscarRemplazar = 0
         indiceTexto+=1
     return cadenaTexto
-print(buscarYRemplazar("hola que hace","e","a"))
+
+
 def buscarYReemplazar2(cadenaTexto, cadenaBuscar, cadenaReemplazar):
     cantidad = len(cadenaBuscar)
     indice = 0
